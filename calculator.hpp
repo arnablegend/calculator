@@ -8,32 +8,44 @@
 
 class Calculator{
   public:
-    Calculator(uint32_t digits)
-      : digits_(digits),
+    Calculator(uint32_t upper_limit)
+      : upper_limit_(upper_limit),
         correct_(0),
         total_(0) {
         srand(time(0));
     }
 
-    uint32_t get_digits() { return digits_; }
-    uint32_t get_correct() { return correct_; }
-    uint32_t get_total() { return total_; }
+    uint32_t upper_limit() { return upper_limit_; }
+    uint32_t correct() { return correct_; }
+    uint32_t total() { return total_; }
 
-    void update_digits(uint32_t digits){
-        if(digits > 8) {
-            std::cout << "More than 8 digits not supported" << std::endl;
+    void update_limit(uint32_t upper_limit){
+        if(upper_limit > 1000000000000) {
             exit(1);
         }
-        digits_ = digits;
+        upper_limit_ = upper_limit;
     }
 
-    void calculate_result(){
-        uint32_t upper_limit = pow(10, digits_);
-        uint32_t op = rand() % 4;
+    void determine_result(char t){
+        if(t == 'r')
+            calculate_result(rand() % 4);
+        else if(t == 'a')
+            calculate_result(0);
+        else if(t == 'm')
+            calculate_result(1);
+        else if(t == 's')
+            calculate_result(2);
+        else if(t == 'd')
+            calculate_result(3);
+        else
+            exit(1);
+    }
+
+    void calculate_result(uint32_t op){
         std::vector<std::string> op_str = {" + ", " - ", " * ", " / "};
         uint32_t num_1, num_2, result;
-        num_1 = rand() % upper_limit;
-        num_2 = rand() % upper_limit;
+        num_1 = rand() % upper_limit_;
+        num_2 = rand() % upper_limit_;
         switch(op){
             case 0:
                 result_ = num_1 + num_2;
@@ -47,7 +59,7 @@ class Calculator{
                 result_ = num_1 * num_2;
                 break;
             case 3:
-                num_1 = num_2 * (rand() % upper_limit);
+                num_1 = num_2 * (rand() % upper_limit_);
                 result_ = num_1 / num_2;
                 break;
             default:
@@ -76,7 +88,7 @@ class Calculator{
 
 
   private:
-    uint32_t digits_;
+    uint32_t upper_limit_;
     uint32_t correct_;
     uint32_t total_;
     uint32_t result_;
