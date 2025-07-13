@@ -34,9 +34,9 @@ class Calculator{
         else if(t == 'a')
             calculate_result(0);
         else if(t == 'm')
-            calculate_result(1);
-        else if(t == 's')
             calculate_result(2);
+        else if(t == 's')
+            calculate_result(1);
         else if(t == 'd')
             calculate_result(3);
         else
@@ -61,6 +61,7 @@ class Calculator{
                 result_ = num_1 * num_2;
                 break;
             case 3:
+                if(num_2 == 0)  num_2++;
                 num_1 = num_2 * (rand() % upper_limit_);
                 result_ = num_1 / num_2;
                 break;
