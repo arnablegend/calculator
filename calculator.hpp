@@ -4,7 +4,9 @@
 #include <cmath>
 #include <ctime>
 #include <cstdlib>
+#include <vector>
 #include <string>
+#include <cstdint>
 
 class Calculator{
   public:
