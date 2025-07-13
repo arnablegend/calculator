@@ -1,6 +1,7 @@
 #include "iostream"
 #include <cstdlib>
 #include <string>
+#include <cstdint>
 
 #include "calculator.hpp"
 
@@ -14,14 +15,19 @@ int main(int argc, char** argv){
     Calculator obj(upper_limit);
     cout << "Welcome to calculator. Current upper limit is " << obj.upper_limit() << endl;
 
-    cout << "How many calculations you want to practice in this run? ";
-    cin >> limit;
-    cout << "Do you want to randomize(r) / Addition(a) / Multiplication(m) / Substraction(s) / Division(d) ? ";
-    cin >> t;
-    while(limit--){
-        obj.determine_result(t);
-        obj.handle_input();
+    while(true){
+        cout << "How many calculations you want to practice in this run? ";
+        cin >> limit;
+        cout << "Do you want to randomize(r) / Addition(a) / Multiplication(m) / Substraction(s) / Division(d) ? ";
+        cin >> t;
+        while(limit--){
+            obj.determine_result(t);
+            obj.handle_input();
+        }
+        cout << "Final score : " << obj.correct() << "/" << obj.total() << endl;
+        cout << "Do you want to continue? (y/n) " << endl;
+        cin >> t;
+        if(tolower(t) != 'y') break;
     }
-    cout << "Final score : " << obj.correct() << "/" << obj.total() << endl;
     return 0;
 }
